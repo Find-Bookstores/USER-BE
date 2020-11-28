@@ -31,6 +31,8 @@ public class Store {
 
     private String openingHours;
 
+    private String content;
+
     public Store update(String number, String openingHours) {
         this.number = number;
         this.openingHours = openingHours;
