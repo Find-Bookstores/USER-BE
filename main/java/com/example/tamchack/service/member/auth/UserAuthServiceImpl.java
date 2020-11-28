@@ -17,8 +17,8 @@ public class UserAuthServiceImpl implements UserAuthService {
     private final JwtUtil jwtUtil;
 
     @Override
-    public TokenResponse UserSignIn(SignInRequest signInRequest) {
-        User user = userRepository.findByIdAndPw(signInRequest.getId(), signInRequest.getPassword());
+    public TokenResponse userSignIn(SignInRequest signInRequest) {
+        User user = userRepository.findByIdAndPassword(signInRequest.getId(), signInRequest.getPassword());
         if(user == null){
             throw new RuntimeException();
         }
