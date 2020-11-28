@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StoreUserRepository extends JpaRepository<StoreUser, String> {
-    StoreUser findByIdAndPw(String Id, String pw);
-    StoreUser findByPw(String pw);
+    StoreUser findByIdAndPassword(String Id, String password);
+    StoreUser findByPassword(String password);
 }
