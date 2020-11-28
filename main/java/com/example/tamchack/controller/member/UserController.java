@@ -11,26 +11,26 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserSignUpService userSignUpService;
     private final UserAuthService userAuthService;
     private final ReviseUserPwService reviseUserPwService;
 
-    @PostMapping("signup/user")
+    @PostMapping("/signup")
     public void userSignUp(@RequestBody UserSignUpRequest userSignUpRequest){
 
         userSignUpService.userSignUp(userSignUpRequest);
     }
 
-    @PostMapping("login/user")
-    public TokenResponse userSignIn(@RequestBody SignInRequest signInRequest, @RequestHeader("Authorization") String Token){
+    @PostMapping("/login")
+    public TokenResponse userSignIn(@RequestBody SignInRequest signInRequest, String Token){
 
         return userAuthService.userSignIn(signInRequest);
     }
 
-    @PostMapping("user/mypage/revisepw")
+    @PutMapping("/mypage/password")
     public void reviseUserPassword (@RequestBody ReviseUserPwRequest reviseUserPwRequest, @RequestHeader String token) {
         reviseUserPwService.reviseUserPassword(reviseUserPwRequest, token);
     }

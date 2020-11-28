@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/book/input")
+@RequestMapping("/book")
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
 
     @PostMapping
-    public void inPutBook(@RequestParam String name,
+    public void inputBook(@RequestParam String name,
                           @RequestParam String author,
                           @RequestParam String publisher,
                           @RequestParam MultipartFile image){
-        bookService.writeBook(
+        bookService.inputBook(
                 BookRequest.builder()
                 .name(name)
                 .author(author)
