@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BookMarkRequest {
-    private String user_id;
-    private String Store_id;
+    private String userId;
+    private String StoreId;
 }

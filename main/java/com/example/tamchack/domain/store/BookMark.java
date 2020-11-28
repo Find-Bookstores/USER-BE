@@ -17,7 +17,7 @@ public class BookMark {
     @Id
     private int id;
 
-    private String user_id;
+    private String userId;
 
-    private String store_id;
+    private String storeId;
 }
