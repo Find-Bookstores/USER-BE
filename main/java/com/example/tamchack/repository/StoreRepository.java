@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface StoreRepository extends JpaRepository<Store, Integer>{
     Optional <Store> findByUserId(String userId);
 
-    Page<Store> findAllByStoreNameOrStoreAddressContainsOrderByCreatedAtDesc(
+    Page<Store> findAllByStoreNameContainsOrStoreAddressContainsOrderByCreatedAtDesc(
             String storeName, String Address, Pageable page);
 }
