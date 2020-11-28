@@ -17,8 +17,8 @@ public class StoreUserAuthServiceImpl implements StoreUserAuthService {
     private final JwtUtil jwtUtil;
 
     @Override
-    public TokenResponse StoreUserSignIn(SignInRequest signInRequest) {
-        StoreUser storeUser = storeUserRepository.findByIdAndPw(signInRequest.getId(), signInRequest.getPassword());
+    public TokenResponse storeUserSignIn(SignInRequest signInRequest) {
+        StoreUser storeUser = storeUserRepository.findByIdAndPassword(signInRequest.getId(), signInRequest.getPassword());
         if(storeUser == null){
             throw new RuntimeException();
         }

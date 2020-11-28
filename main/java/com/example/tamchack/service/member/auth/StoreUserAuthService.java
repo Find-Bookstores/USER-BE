@@ -4,5 +4,5 @@ import com.example.tamchack.payload.request.SignInRequest;
 import com.example.tamchack.payload.response.TokenResponse;
 
 public interface StoreUserAuthService {
-    TokenResponse StoreUserSignIn(SignInRequest signInRequest);
+    TokenResponse storeUserSignIn(SignInRequest signInRequest);
 }
