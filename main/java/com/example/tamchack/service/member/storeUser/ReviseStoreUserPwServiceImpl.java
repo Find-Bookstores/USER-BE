@@ -14,8 +14,8 @@ public class ReviseStoreUserPwServiceImpl implements ReviseStoreUserPwService {
 
     private final StoreUserRepository storeUserRepository;
     @Override
-    public void reviseStoreUserPw(ReviseStoreUserPwRequest reviseStoreUserPwRequest, String token) {
-        StoreUser storeUser = storeUserRepository.findByPw(jwtUtil.parseToken(token));
+    public void reviseStoreUserPassword(ReviseStoreUserPwRequest reviseStoreUserPwRequest, String token) {
+        StoreUser storeUser = storeUserRepository.findByPassword(jwtUtil.parseToken(token));
         storeUser.update(reviseStoreUserPwRequest.getPassword());
         storeUserRepository.save(storeUser);
     }
