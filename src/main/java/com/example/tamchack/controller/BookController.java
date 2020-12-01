@@ -1,9 +1,10 @@
 package com.example.tamchack.controller;
 
-import com.example.tamchack.payload.request.BookMarkRequest;
 import com.example.tamchack.payload.request.BookRequest;
-import com.example.tamchack.service.Book.BookService;
+import com.example.tamchack.service.book.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class BookController {
     private final BookService bookService;
 
-    @PostMapping
+    @PostMapping("/inputbook")
     public void inputBook(@RequestParam String name,
                           @RequestParam String author,
                           @RequestParam String publisher,
@@ -26,5 +27,11 @@ public class BookController {
                 .image(image)
                 .build()
         );
+    }
+
+    @GetMapping("/search")
+    public void searchBook(@RequestParam String title,
+                           @PageableDefault Pageable pageable){
+        bookService.searchBook(title, pageable);
     }
 }
