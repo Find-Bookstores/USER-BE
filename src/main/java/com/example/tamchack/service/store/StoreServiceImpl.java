@@ -7,7 +7,7 @@ import com.example.tamchack.domain.user.User;
 import com.example.tamchack.payload.request.BookMarkRequest;
 import com.example.tamchack.payload.request.ReviseStoreRequest;
 import com.example.tamchack.payload.response.ApplicationListResponse;
-import com.example.tamchack.payload.response.SearchResponse;
+import com.example.tamchack.payload.response.StoreResponse;
 import com.example.tamchack.repository.BookMarkRepository;
 import com.example.tamchack.repository.StoreRepository;
 import com.example.tamchack.repository.StoreUserRepository;
@@ -45,25 +45,28 @@ public class StoreServiceImpl implements StoreService {
         User user = userRepository.findById(jwtUtil.parseToken(token)).orElseThrow(RuntimeException::new);
         bookMarkRepository.save(
                 BookMark.builder()
-                .userId(bookMarkRequest.getUserId())
+                .userId(user.getId())
                 .storeId(bookMarkRequest.getStoreId())
                 .build()
         );
     }
 
     @Override
-    public ApplicationListResponse searchStore(String query, String storeName, Pageable page) {
+    public ApplicationListResponse searchStore(String query, Pageable page) {
 
         Page<Store> storePage = storeRepository
-                .findAllByStoreNameContainsOrStoreAddressContainsOrderByCreatedAtDesc(
+                .findAllByStoreNameContainsOrStoreAddressContains(
                         query, query, page
                 );
 
-        List<SearchResponse> searchResponse = new ArrayList<>();
+        List<StoreResponse> storeResponse = new ArrayList<>();
 
         for(Store store : storePage) {
-            searchResponse.add(
-                    SearchResponse.builder()
+            storeResponse.add(
+                    StoreResponse.builder()
+                            .storeId(store.getId())
+                            .title(store.getStoreName())
+                            .address(store.getStoreAddress())
                             .build()
             );
         }
@@ -71,7 +74,7 @@ public class StoreServiceImpl implements StoreService {
         return ApplicationListResponse.builder()
                 .totalElements((int)storePage.getTotalElements())
                 .totalPages(storePage.getTotalPages())
-                .applicationResponses(searchResponse)
+                .applicationResponses(storeResponse)
                 .build();
     }
 

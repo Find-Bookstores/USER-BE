@@ -2,55 +2,48 @@ package com.example.tamchack.service.member.storeUser;
 
 import com.example.tamchack.domain.store.Store;
 import com.example.tamchack.domain.user.StoreUser;
+import com.example.tamchack.exception.UserAlreadyEsixtsException;
+import com.example.tamchack.payload.request.ReviseStoreUserPwRequest;
 import com.example.tamchack.payload.request.StoreUserSignUpRequest;
 import com.example.tamchack.repository.StoreRepository;
 import com.example.tamchack.repository.StoreUserRepository;
+import com.example.tamchack.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class StoreUserSignUpServiceImpl implements StoreUserSignUpService {
+public class StoreUserServiceImpl implements StoreUserService {
 
     private final StoreUserRepository storeuserRepository;
     private final StoreRepository storeRepository;
+    private final JwtUtil jwtUtil;
 
     @Override
     public void storeUserSignUp(StoreUserSignUpRequest storeUserSignUpRequest) {
-        storeuserRepository.findById(storeUserSignUpRequest.getId())
-                .ifPresent(storeUser -> {
-                    //throw new 유저이미있는예외();
-                });
+        storeuserRepository.findById(storeUserSignUpRequest.getId()).ifPresent(u -> {throw new UserAlreadyEsixtsException();});
         storeuserRepository.save(
                 StoreUser.builder()
                         .id(storeUserSignUpRequest.getId())
                         .password(storeUserSignUpRequest.getPassword())
-                        .name(storeUserSignUpRequest.getName())
                         .build()
         );
 
         storeRepository.save(
                 Store.builder()
                         .userId(storeUserSignUpRequest.getId())
-                        .name(storeUserSignUpRequest.getStoreName())
-                        .address(storeUserSignUpRequest.getAddress())
+                        .storeName(storeUserSignUpRequest.getStoreName())
+                        .storeAddress(storeUserSignUpRequest.getAddress())
                         .number(storeUserSignUpRequest.getNumber())
                         .openingHours(storeUserSignUpRequest.getOpeningHours())
                         .build()
         );
-        /*
-        try {
-            Store store = storeRepository.findById(5)
-                    .orElseThrow(Exception::new);
-            store.update("", "");
-
-            storeRepository.save(store);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        */
     }
-    //주입받기 위한 final 사용
 
+    @Override
+    public void reviseStoreUserPassword(ReviseStoreUserPwRequest reviseStoreUserPwRequest, String token) {
+        StoreUser storeUser = storeuserRepository.findByPassword(jwtUtil.parseToken(token));
+        storeUser.update(reviseStoreUserPwRequest.getPassword());
+        storeuserRepository.save(storeUser);
+    }
 }
