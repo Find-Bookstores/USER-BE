@@ -41,7 +41,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void recommend(BookMarkRequest bookMarkRequest, String token) {
+    public void favoriteStore(BookMarkRequest bookMarkRequest, String token) {
         User user = userRepository.findById(jwtUtil.parseToken(token)).orElseThrow(RuntimeException::new);
         bookMarkRepository.save(
                 BookMark.builder()

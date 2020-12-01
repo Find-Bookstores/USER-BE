@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 public interface StoreService{
     void reviseStore(ReviseStoreRequest reviseStoreRequest, String token);
 
-    void recommend(BookMarkRequest bookMarkRequest, String token);
+    void favoriteStore(BookMarkRequest bookMarkRequest, String token);
 
     ApplicationListResponse searchStore(String query, Pageable page);
 }
