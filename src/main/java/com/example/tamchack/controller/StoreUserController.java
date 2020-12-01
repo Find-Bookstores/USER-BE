@@ -30,7 +30,7 @@ public class StoreUserController {
     }
 
     @PostMapping("/login")
-    public TokenResponse storeUserSignIn(@RequestBody SignInRequest signInRequest, @RequestHeader("Authorization") String token){
+    public TokenResponse storeUserSignIn(@RequestBody SignInRequest signInRequest, @RequestHeader String token){
 
         return authService.storeUserSignIn(signInRequest);
     }
