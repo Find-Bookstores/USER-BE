@@ -29,8 +29,8 @@ public class StoreController {
         bookService.searchBookInStoreInfo(storeId, query, page);
     }
 
-    @PutMapping("/recommend")
-    public void recommend(@RequestBody BookMarkRequest bookMarkRequest, @RequestHeader String token){
-        storeService.recommend(bookMarkRequest, token);
+    @PutMapping("/favoritestore")
+    public void favoriteStore(@RequestBody BookMarkRequest bookMarkRequest, @RequestHeader String token){
+        storeService.favoriteStore(bookMarkRequest, token);
     }
 }
