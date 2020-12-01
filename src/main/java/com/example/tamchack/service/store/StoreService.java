@@ -10,5 +10,5 @@ public interface StoreService{
 
     void recommend(BookMarkRequest bookMarkRequest, String token);
 
-    ApplicationListResponse searchStore(String query, String storeName, Pageable page);
+    ApplicationListResponse searchStore(String query, Pageable page);
 }
