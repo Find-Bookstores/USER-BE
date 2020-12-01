@@ -3,9 +3,8 @@ package com.example.tamchack.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.FORBIDDEN)
+@ResponseStatus(code = HttpStatus.FORBIDDEN, reason = "Invalid TokenResponse")
 public class InvalidTokenException extends RuntimeException{
-    public InvalidTokenException() {
-        super("Invalid TokenResponse");
-    }
 }
+
+
