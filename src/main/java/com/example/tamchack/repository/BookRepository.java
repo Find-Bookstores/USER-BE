@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
-    Page<Book> findAllByBookNameContainsOrderByCreatedAtDesc(
-            String bookName, Pageable page);
+    Page<Book> findAllByBookNameContains(String bookName, Pageable page);
+
+    Page<Book> findAllByStoreIdAndBookNameContains(Integer storeId, String bookName, Pageable page);
 }
