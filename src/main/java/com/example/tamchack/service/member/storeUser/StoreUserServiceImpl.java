@@ -21,9 +21,10 @@ public class StoreUserServiceImpl implements StoreUserService {
 
     @Override
     public void storeUserSignUp(StoreUserSignUpRequest storeUserSignUpRequest) {
-        storeuserRepository.findById(storeUserSignUpRequest.getId()).ifPresent(u -> {
-            throw new UserAlreadyEsixtsException();
-        });
+        storeuserRepository.findById(storeUserSignUpRequest.getId())
+                .ifPresent(u -> {
+                    throw new UserAlreadyEsixtsException();
+                });
         storeuserRepository.save(
                 StoreUser.builder()
                         .id(storeUserSignUpRequest.getId())
