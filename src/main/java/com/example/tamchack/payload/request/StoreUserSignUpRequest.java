@@ -8,10 +8,9 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StoreUserSignUpRequest { //Admin 회원가입
+public class StoreUserSignUpRequest {
     private String id;
     private String password;
-    private String name;
     private String address;
     private String storeName;
     private String number;
