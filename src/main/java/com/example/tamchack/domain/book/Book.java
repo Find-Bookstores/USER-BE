@@ -17,11 +17,13 @@ public class Book {
     @Id
     private int id;
 
-    private String name;
+    private String bookName;
 
     private String author;
 
     private String publisher;
 
-    private String content;
+    private Integer storeId;
+
+    private boolean existence;
 }

@@ -23,7 +23,7 @@ public class StoreUser {
 
     private String address;
 
-    private String storename;
+    private String storeName;
 
     public StoreUser update(String password) {
         this.password = password;

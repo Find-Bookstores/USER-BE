@@ -23,15 +23,13 @@ public class Store {
 
     private String userId;
 
-    private String name;
+    private String storeName;
 
-    private String address;
+    private String storeAddress;
 
     private String number;
 
     private String openingHours;
-
-    private String content;
 
     public Store update(String number, String openingHours) {
         this.number = number;

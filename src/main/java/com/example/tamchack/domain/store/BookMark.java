@@ -8,16 +8,18 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name = "tbl_book_mark")
+@Entity(name = "tbl_bookmark")
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookMark {
+
     @Id
     private int id;
 
     private String userId;
 
     private String storeId;
+
 }
